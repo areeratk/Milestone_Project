@@ -1,0 +1,17 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Jupyter Notebook
+.ipynb_checkpoints
+COLAB_diabetes_decision_tree_Areerat.ipynb
+diabetes_decision_tree_Areerat.ipynb
+decision_tree.png
+diabetes.png
+.Rhistory
+
+README.md
+
+
+
