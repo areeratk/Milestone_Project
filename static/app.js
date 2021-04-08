@@ -38,10 +38,10 @@ function buildPlot(stock) {
   var url = `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?start_date=2014-01-01&end_date=${date}&api_key=${apiKey}`;
   url = '/stock/ibm'
   d3.json(url, function(data) {
-    var name = data.dataset.name;
-    var stock = data.dataset.dataset_code;
-    var startDate = data.dataset.start_date;
-    var endDate = data.dataset.end_date;
+    var name = data['Meta Data'].symbol;
+    var stock =  data['Meta Data'].symbol;
+    // var startDate = data.dataset.start_date;
+    // var endDate = data.dataset.end_date;
     var dates = unpack(data.dataset.data, 0);
     var closingPrices = unpack(data.dataset.data, 11);
 
