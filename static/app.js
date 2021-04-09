@@ -28,7 +28,7 @@ function buildPlot(stock) {
 
   var openelement = d3.select("#openoption");
   var openelementvalue = openelement.property("value");
-  console.log(openelementvalue);
+
   var inputElement = d3.select("#stockticker");
   var inputValue = inputElement.property("value");
   if (inputValue === ""){
