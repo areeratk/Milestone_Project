@@ -14,11 +14,11 @@ $.getJSON(jsonurl, function (data) {
   })
 });
 
-var tbody = $("<tbody />"),tr;
+var tbody = $("<tbody />"), tr;
 
 
 function unpack(rows, index) {
-  return rows.map(function(row) {
+  return rows.map(function (row) {
     return row[index];
   });
 }
@@ -26,42 +26,71 @@ function unpack(rows, index) {
 function buildPlot(stock) {
 
 
-    if (stock==="Choose Company") return;
-
-  var apiKey = "Rn7DiGxY-kcDgp1GWyrD";
-
-
+  var openelement = d3.select("#openoption");
+  var openelementvalue = openelement.property("value");
+  console.log(openelementvalue);
+  var inputElement = d3.select("#stockticker");
+  var inputValue = inputElement.property("value");
+  if (inputValue === ""){
+    return;
+  } 
   var today = new Date();
-  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
 
-  var url = `https://www.quandl.com/api/v3/datasets/WIKI/${stock}.json?start_date=2014-01-01&end_date=${date}&api_key=${apiKey}`;
-  url = '/stock/ibm'
-  d3.json(url, function(data) {
-    var name = data['Meta Data'].symbol;
-    var stock =  data['Meta Data'].symbol;
-    // var startDate = data.dataset.start_date;
-    // var endDate = data.dataset.end_date;
-    var dates = unpack(data.dataset.data, 0);
-    var closingPrices = unpack(data.dataset.data, 11);
+  url = `/stock/${inputValue}`
+  d3.json(url).then(function (data) {
+    
+
+    var name = data['Meta Data']['2. Symbol'];
+    var stock = data['Meta Data']['2. Symbol'];
+   
+    var dates = [] 
+    var closingPrices = [] 
+    var OpeningPrices = [] 
+
+    for (const [key, value] of Object.entries(data["Time Series (Daily)"])) {
+    //   if (key >= dateentered) {
+      dates.push(key);
+      closingPrices.push(value['4. close']);
+      OpeningPrices.push(value['1. open']);
+    // }
+    }
+   
+
+
 
     var trace1 = {
       type: "scatter",
       mode: "lines",
-      name: name,
+      name: "Closing",
       x: dates,
       y: closingPrices,
       line: {
-        color: "#17BECF"
+        color: "blue"
       }
     };
-
-    var data = [trace1];
-
+    var trace2 = {
+      type: "scatter",
+      mode: "lines",
+      name: "Opening",
+      x: dates,
+      y: OpeningPrices,
+      line: {
+        color: "orange"
+      }
+    };
+    var data = []
+    if (document.getElementById("openoption").checked){
+        data.push(trace2)
+    }
+    if (document.getElementById("closeoption").checked){
+        data.push(trace1)
+    }
     var layout = {
-      title: `${stock} closing prices`,
+      title: `${stock} prices`,
       xaxis: {
-        range: [startDate, endDate],
+        range: d3.extent(dates),
         type: "date"
       },
       yaxis: {

@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect
 import requests 
 import datetime
+import os
+###from config import api_key
+
+apikey = os.environ['alphakey']
+
+
+
 
 app = Flask(__name__)
 
@@ -12,11 +19,11 @@ def index():
 def stock(id):
   today =   datetime.date.today()
   pastdate = datetime.date.today() + datetime.timedelta(-28) 
-  apikey='6TXYPTLVAQDT4WRK'
+  
   
   url = f'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol={id}&apikey={apikey}'
   data = requests.get(url).json()
-  print(data)
+ 
   return data
 
 

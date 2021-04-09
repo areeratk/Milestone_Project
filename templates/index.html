@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Skeleton application demoing Heroku and Flask integration.">
@@ -8,26 +9,35 @@
     <!-- <link rel="icon" href="favicon.ico"> -->
 
     <title>Wilkommen, bienvenue, and welcome to Heroku!</title>
-
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  </head>
-  <body>
+
+</head>
+
+<body>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-left">
-          <h2>Hello, World!</h2>
-          <ul>
-            <li><a href="/about">About</a></li>
-            <li><a target="_blank" href="https://www.heroku.com/">Heroku</a></li>
-            <li><a target="_blank" href="http://flask.pocoo.org/">Flask</a></li>
-            <li><a target="_blank" href="http://jinja.pocoo.org/">Jinja2</a></li>
-            <li><a target="_blank" href="http://getbootstrap.com/">Bootstrap</a></li>
-          </ul>
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                <h2>Ticker Look Up!</h2>
+            </div>
         </div>
-      </div>
-    </div>
-    <div id="first-dopdown-plot">
+        <div class="row">
+            <div class="col-lg-12 text-left">
+                Enter Ticker <input id="stockticker">
+                <div>
+                    <input type="checkbox" id="openoption"></option> Opening Price
+                </div>
+                <div>
+                    <input type="checkbox" id="closeoption"></option> Closing Price
+                </div>
+                <div>
+                    <button onclick="buildPlot()">Update Data</button>
+                </div>
+                <div id="first-dopdown-plot">
+                </div>
+            </div>
+        </div>
 
     </div>
     <!-- Bootstrap core JavaScript
@@ -37,5 +47,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/static/app.js"></script>
-  </body>
+</body>
+
 </html>
